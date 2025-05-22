@@ -1,0 +1,69 @@
+% compile this file with xelatex
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=2cm, a4paper]{geometry}
+\usepackage{setspace}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{fancyvrb}
+\usepackage{amssymb}
+\usepackage{minted}
+\usepackage{enumitem}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Sans TC}
+
+\renewcommand{\contentsname}{Contents}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\newcommand{\mytitle}{網路管理與系統管理 HW 11}
+\newcommand{\myauthor}{B13902022 賴昱錡}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\mytitle}
+\fancyhead[R]{\myauthor}
+
+\title{\mytitle}
+\author{\textbf{\myauthor}}
+\date{\today}
+
+\begin{document}
+
+\doublespacing
+\maketitle
+
+\section*{2. 果汁店也有洞 (20 pts)}
+
+\newpage
+\section*{4. TESTING in the FUZZ (41 pts)}
+
+\newpage
+\section*{5. 敗北協定太多了！ (28 pts)}
+
+\newpage
+\section*{6. 猫物語（赤）(34 pts)}
+
+
+\end{document}
+% how to display codes?
+% \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{python}
+% \end{minted}
+
+% how to display images?
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{}
+%     \caption{Caption}
+% \end{figure}
+% test
