@@ -40,19 +40,75 @@
 
 \begin{document}
 
-\doublespacing
+% \doublespacing
 \maketitle
 
 \section*{2. 果汁店也有洞 (20 pts)}
+\subsection*{(a)}
+\subsubsection*{(i) DOM XSS}
+Observe that after we search for something, the query keyword we use will be embedded directly in the page. So we can type following text in the searching textbox, the alert function is then successfully triggered.
+\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{html}
+<iframe src="javascript:alert(`xss`)">
+\end{minted}
+\subsubsection*{(v) View Basket}
+I open Burp Suite's browser and intercept its traffic, then I observe that when I click \texttt{Your Basket}, there's a GET request contains something like \texttt{GET /rest/basket/1 HTTP/1.1} (if we login admin), then try to change it to 2 or 3 and forward the request, the content of basket is someone else's.
+
+
+\subsection*{(b)}
 
 \newpage
 \section*{4. TESTING in the FUZZ (41 pts)}
+\subsection*{(a)}
+mutation-based fuzzing is about mutating the existing input values but in lack of understaning the format of the data. generation-based fuzzing is about generating input based on specific or expected format/structure.
+subsection*{(b)}
+
 
 \newpage
 \section*{5. 敗北協定太多了！ (28 pts)}
 
 \newpage
 \section*{6. 猫物語（赤）(34 pts)}
+\subsection*{(a)}
+我得到的 flag 是: \texttt{NASA\_HW11{pseudorandomness\_does\_not\_guarantee\_unpredictability}}. 可以觀察到 fatcat.py 得到 random number 的公式是 $k=(ak+c)\mod{m}$, $k$ 是當前的 state, 其中 $a$ 和 $c$ 是可以透過連續的 3 次 state output 得到的, 假設我們亂猜後得到 3 個正確的 state: $k_1,\ k_2,\ k_3$. 則他們會有以下關係式：
+\begin{align*}
+    k_2=(ak_1+c)\mod{m} \\
+    k_3=(ak_2+c)\mod{m}
+\end{align*}
+
+透過一些簡單的數學，我們可以得到 $a=(k_1-k_2)^{-1}(k_2-k_3),\ c=(k_2-ak_1)\mod{m}$ (在這裡 $(k_1-k_2)^{-1}$ 代表其模 $m$ 下的模逆元)。有了 a 和 c 我們就能預測接下來的每個數字，但 trust 要大於等於 100 才會有 flag1，所以我們就用 pwntools 猜 100 多次，再向 server 索取答案。我的 script 如下所示:
+\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{python}
+from pwn import *
+
+server = remote('140.112.91.4', 1234)
+
+server.sendlineafter(b'Your choice: ', b'1')
+server.sendlineafter(b'Guess a number: ', b'1')
+k1 = int(server.recvuntil(b'.').decode().split(' ')[8].rstrip(','))
+
+server.sendlineafter(b'Your choice: ', b'1')
+server.sendlineafter(b'Guess a number: ', b'1')
+k2 = int(server.recvuntil(b'.').decode().split(' ')[8].rstrip(','))
+
+server.sendlineafter(b'Your choice: ', b'1')
+server.sendlineafter(b'Guess a number: ', b'1')
+k3 = int(server.recvuntil(b'.').decode().split(' ')[8].rstrip(','))
+
+m = ... # too long to fit in, but it's given by fatcat.py
+
+a = pow(k1-k2, -1, m) * (k2-k3)
+c = (k2-a*k1)%m
+
+cur = k3
+
+for i in range(100):
+    server.sendlineafter(b'Your choice: ', b'1')
+    cur = (a*cur+c)%m
+    server.sendlineafter(b'Guess a number: ', str(cur))
+
+server.sendlineafter(b'Your choice: ', b'2')
+flag = server.recvuntil(b'}')
+print(flag)
+\end{minted}
 
 
 \end{document}
