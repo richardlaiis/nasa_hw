@@ -1,1 +1,12 @@
 HW12{S4KiCh4n_sakiCHAN_S4k1ChaN}
+
+if ( argc == 2 )
+  {
+    for ( i = 0; i < flag_len; ++i )
+      pattern[i] ^= key[i % key_len];
+    if ( !strcmp(argv[1], pattern) )
+      puts("Congratulations! You found the flag!");
+    else
+      puts("Haha! wrong >:)!!!!!!");
+    return 0;
+  }

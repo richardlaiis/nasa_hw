@@ -74,6 +74,48 @@ for i in range(0, 100, 3):
 print(flag)
 \end{minted}
 
+\section*{4. Introduction to gnireenignE esreveR}
+這題的 flag 是:
+
+{\centering\verb|HW12{hW0_8UT_WiTH_r3V3Rse_eN91NE3rinG}|\par}
+
+我拿到 flag 的方法是把 chal.exe 丟進 dogbolt.org，然後發現 Hex-Rays 這個 decompiler 竟然幫我分析好原本程式的架構了。基本上，原本的程式包含以下重要變數:
+\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{c}
+char key[9] = "nAs42O2S";
+char pattern[40] = {'&','\x16','B','\x06','I','\'','e','c','1','y','&','`','m','\x18'
+,'[','\a','&','\x1E','\x01','\a','d','|','`',' ','\v','\x1E','\x16','z','\v','~','|',
+'\x16',']','3','\x1A','Z','u','2','\0','\0'}; 
+int flag_len = 38; 
+\end{minted}
+
+看到程式接受輸入的地方 (應該是 main)，他會用 key 對 pattern 做 xor encryption，然後 check 程式接受的參數是不是等於加密後的 pattern。
+\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{c}
+int __fastcall main(int argc,
+  const char ** argv,
+    const char ** envp) {
+  int i; // [rsp+1Ch] [rbp-4h]
+
+  if (argc == 2) {
+    for (i = 0; i < flag_len; ++i)
+      pattern[i] ^= key[i % key_len];
+    if (!strcmp(argv[1], pattern))
+      puts("Congratulations! You found the flag!");
+    else
+      puts("Haha! wrong >:)!!!!!!");
+    return 0;
+  } else {
+    puts("Usage: ./chal.exe <flag>");
+    return 1;
+  }
+}
+\end{minted}
+
+所以我們可以用前面提到的變數實際去 xor 一遍，就可以得到程式中的 pattern/flag。(將 flag 作為 chal.exe 的參數執行，可以得到代表正確的訊息)
+\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{c}
+for (int i = 0; i < flag_len; ++i ) pattern[i] ^= key[i % key_len];
+printf("%s\n", pattern);
+\end{minted}
+
 \end{document}
 % how to display codes?
 % \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{python}
