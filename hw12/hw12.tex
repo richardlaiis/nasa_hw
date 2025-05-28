@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage[margin=2cm, a4paper]{geometry}
+\usepackage{setspace}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{fancyvrb}
+\usepackage{amssymb}
+\usepackage{minted}
+\usepackage{enumitem}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif TC}
+
+\renewcommand{\contentsname}{Contents}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\newcommand{\mytitle}{網路管理與系統管理 HW12}
+\newcommand{\myauthor}{B13902022 賴昱錡}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\mytitle}
+\fancyhead[R]{\myauthor}
+
+\title{\mytitle}
+\author{\textbf{\myauthor}}
+\date{\today}
+
+\begin{document}
+
+\onehalfspacing
+\maketitle
+
+\section*{2.畫中有話}
+\subsection*{(a)}
+首先我們可以知道 pixels 是 secret\_mygo.png 的像素資料，每一項都是一個長度為 3 的 tuple，分別代表紅、藍、綠的數值 (介於 0-255)，在讀入某個字串後 (data)，將每一個字元轉為 unicode，再轉為 8 位的 binary string。在處理 pixels 裡面的資料時，這份扣會把連續三格 pixel (pixels[3*i], pixels[3*i+1], pixels[3*i+2]) 變成一個長度為 9 的 list，之後再根據對應到 data 的第 i 個字元所轉成的字串 (方法如前述)，改變 list 中的數值 (一個 binary string 有 8 項，也對應到 list 的前八項)，最終再將 list 裡面的數值寫回圖片。
+\subsection*{(b)}
+為了找到藏在圖片裡面的 string，我們可以用 3 個像素為單位來解析，很容易可以發現到，如果 (a) 所述的 binary string 的一項是 "1"，則 colors 對應到的一項數值必為奇數，反之則為偶數，所以我們可以跑過足夠多的像素，然後找到很多 binary string 及其對應的 unicode and 字元，用其來拼湊出 flag。
+
+在這裡我使用 python 來找出 flag，程式碼如下，最終得到的結果是： (btw 在那之前可能要安裝 PIL module)
+
+{\centering\verb|HW12{S4KiCh4n_sakiCHAN_S4k1ChaN}|\par}
+
+參考資料是我自己，好耶，這是少數完全不用仰賴 GPT 解出的題目。
+\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{python}
+from PIL import Image
+
+image_file = "secret_mygo.png"
+img = Image.open(image_file)
+pixels = list(img.getdata())
+flag = ""
+
+for i in range(0, 100, 3):
+    colors = list(pixels[i])+list(pixels[i+1])+list(pixels[i+2])
+    tmp = ""
+    for j in range(8):
+        if colors[j] % 2 == 0:
+            tmp = tmp + "0"
+        else:
+            tmp = tmp + "1"
+    flag = flag+chr(int(tmp, 2))
+
+print(flag)
+\end{minted}
+
+\end{document}
+% how to display codes?
+% \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{python}
+% \end{minted}
+
+% how to display images?
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{}
+%     \caption{Caption}
+% \end{figure}
+% test
