@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2025.5.15)  23 MAY 2025 15:25
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2025.5.15)  24 MAY 2025 20:18
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -853,9 +853,13 @@ Package hyperref Info: Link coloring ON on input line 41.
 \@outlinefile=\write5
 \openout5 = `hw11.out'.
 
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
 LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
 
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
@@ -909,17 +913,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.52603pt}.
 
 [3]
-Overfull \hbox (11.87915pt too wide) in paragraph at lines 72--73
+Overfull \hbox (24.23915pt too wide) in paragraph at lines 72--73
 []\TU/NotoSansTC(0)/m/n/12 我 得 到 的 \TU/lmr/m/n/12 flag \TU/NotoSansTC(0)/m/n/12
- 是\TU/lmr/m/n/12 : \TU/lmtt/m/n/12 NASA_HW11pseudorandomness_does_not_guarantee
-_unpredictability\TU/lmr/m/n/12 .
+ 是\TU/lmr/m/n/12 : [][]\TU/lmtt/m/n/12 NASA_HW11{pseudorandomness_does_not_guar
+antee_unpredictability}[]\TU/lmr/m/n/12 .
  []
 
 \openout3 = `hw11.pyg'.
-
-runsystem(pygmentize -l 'python' -f latex -P commandprefix=PYG -F tokenmerge -P
- stripnl='False' -o _minted-hw11/22A6E405764B9873809DBC8656157EFD0B20EB53B8C696
-68A71EFE3C9C832A0D.pygtex hw11.pyg)...executed.
 
 
 (./_minted-hw11/22A6E405764B9873809DBC8656157EFD0B20EB53B8C69668A71EFE3C9C832A0
@@ -933,10 +933,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.52603pt}.
 
 [4])
-runsystem(rm _minted-hw11/5E00207A564DE148D36C806ED341566C0B20EB53B8C69668A71EF
-E3C9C832A0D.pygtex)...executed.
+\openout3 = `hw11.pyg'.
 
 
+(./_minted-hw11/ADE9B3DE3F75C9371E06CED3FB56C9B20B20EB53B8C69668A71EFE3C9C832A0
+D.pygtex)
+\openout3 = `hw11.pyg'.
+
+
+(./_minted-hw11/7C6C12139274F948B47369B90A332A000B20EB53B8C69668A71EFE3C9C832A0
+D.pygtex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.52603pt, for example:
@@ -945,19 +951,28 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.52603pt}.
 
-[5] (./hw11.aux)
+[5])
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.52603pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.52603pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.52603pt}.
+
+[6] (./hw11.aux)
 Package rerunfilecheck Info: File `hw11.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 runsystem(rm hw11.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 20506 strings out of 476696
- 434427 string characters out of 5806955
+ 20550 strings out of 476696
+ 436912 string characters out of 5806955
  1864018 words of memory out of 6000000
- 40402 multiletter control sequences out of 15000+600000
- 521805 words of font info for 98 fonts, out of 8000000 for 9000
+ 40435 multiletter control sequences out of 15000+600000
+ 522466 words of font info for 103 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,11n,97p,429b,772s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,11n,97p,524b,772s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on hw11.pdf (5 pages).
+Output written on hw11.pdf (6 pages).

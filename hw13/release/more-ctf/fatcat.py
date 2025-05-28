@@ -62,9 +62,11 @@ def game(rng, trust):
 
 def OTPEncrypt(msg: bytes) -> bytes:
     key_len = 10
-    key = secrets.token_bytes(key_len)
+    key = secrets.token_bytes(key_len) # Return a random byte string containing nbytes number of bytes
     enc = bytes(msg[i] ^ key[i % key_len] for i in range(len(msg)))
     return enc
+
+# NASA_HW11{
 
 def send_exam_result():
     print("My score on the exam?")

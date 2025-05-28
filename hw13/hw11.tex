@@ -69,7 +69,7 @@ subsection*{(b)}
 \newpage
 \section*{6. 猫物語（赤）(34 pts)}
 \subsection*{(a)}
-我得到的 flag 是: \texttt{NASA\_HW11{pseudorandomness\_does\_not\_guarantee\_unpredictability}}. 可以觀察到 fatcat.py 得到 random number 的公式是 $k=(ak+c)\mod{m}$, $k$ 是當前的 state, 其中 $a$ 和 $c$ 是可以透過連續的 3 次 state output 得到的, 假設我們亂猜後得到 3 個正確的 state: $k_1,\ k_2,\ k_3$. 則他們會有以下關係式：
+我得到的 flag 是: \verb|NASA_HW11{pseudorandomness_does_not_guarantee_unpredictability}|. 可以觀察到 fatcat.py 得到 random number 的公式是 $k=(ak+c)\mod{m}$, $k$ 是當前的 state, 其中 $a$ 和 $c$ 是可以透過連續的 3 次 state output 得到的, 假設我們亂猜後得到 3 個正確的 state: $k_1,\ k_2,\ k_3$. 則他們會有以下關係式：
 \begin{align*}
     k_2=(ak_1+c)\mod{m} \\
     k_3=(ak_2+c)\mod{m}
@@ -109,7 +109,44 @@ server.sendlineafter(b'Your choice: ', b'2')
 flag = server.recvuntil(b'}')
 print(flag)
 \end{minted}
+\subsection*{(b)}
+The flag (FLAG2) is \verb|NASA_HW11{`Z\iW^b8$s"f\I[P<"}|. Observe that the key is used in a cyclic manner. Since we know the prefix of flag must be \verb|NASA_HW11{|, and its length is equal to the OTP key (it's 10). By xor the string we got in remote server and the prefix, we can obtain the key, thus the original string.
+\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{python}
+import binascii
 
+tmp = # too long to fit in
+tmp = binascii.unhexlify(tmp)
+
+prefix = b'NASA_HW11{'
+key = bytes([tmp[i] ^ prefix[i] for i in range(10)])
+
+full_flag = bytes([tmp[i] ^ key[i % 10] for i in range(len(tmp))]).decode()
+print(full_flag)
+\end{minted}
+\subsection*{(c)}
+The flag (FLAG3) is \verb|NASA_HW11{https://youtu.be/1GxwDuV5JMc}|. Just brute force since $2^{24}$ is not that big, so we can store all the answer and its corresponding key in dictionary. (for simplicity, I don't consider the collisions). My script is shown as below:
+\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,linenos,breaklines]{python}
+from pwn import *
+import hashlib
+
+mp = dict()
+for i in range(2**24):
+    mp[hashlib.md5(str(i).encode()).hexdigest()[0:8]] = i
+
+server = remote('140.112.91.4', 1234)
+server.sendlineafter(b'Your choice: ', b'4')
+
+for i in range(10):
+    prefix = server.recvuntil(b': ').decode().split(' ')[7].strip('"').rstrip('"')
+    ans = str(mp[prefix])
+    server.sendline(ans)
+
+ans1 = server.recvline()
+ans2 = server.recvline()
+print(ans1.decode(), ans2.decode())
+\end{minted}
+\subsection*{(d)}
+FLAG4 是 \verb|NASA_HW11{y0u_KN0w_r3F13C710n_4774cK}|，觀察 fatcat.py 可以發現 verify 的時候名字一點都不重要，所以只要讓 sha256 的結果是對的就行，而同時我們要根據 server 給的 nounce 輸入正確的結果，但似乎需要 shared key 欸？其實只要把 nounce 丟進 prover 然後把 server 輸出的 mac 複製下來，再回到 verify 的過程中，輸入 \texttt{richardlaiis||<mac>}， 就可以取得 flag 了，好耶！
 
 \end{document}
 % how to display codes?

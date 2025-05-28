@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{binascii}
+
+\PYG{n}{tmp} \PYG{o}{=} \PYG{c+c1}{\PYGZsh{} too long to fit in}
+\PYG{n}{tmp} \PYG{o}{=} \PYG{n}{binascii}\PYG{o}{.}\PYG{n}{unhexlify}\PYG{p}{(}\PYG{n}{tmp}\PYG{p}{)}
+
+\PYG{n}{prefix} \PYG{o}{=} \PYG{l+s+sa}{b}\PYG{l+s+s1}{\PYGZsq{}NASA\PYGZus{}HW11\PYGZob{}\PYGZsq{}}
+\PYG{n}{key} \PYG{o}{=} \PYG{n+nb}{bytes}\PYG{p}{([}\PYG{n}{tmp}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZca{}} \PYG{n}{prefix}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)])}
+
+\PYG{n}{full\PYGZus{}flag} \PYG{o}{=} \PYG{n+nb}{bytes}\PYG{p}{([}\PYG{n}{tmp}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZca{}} \PYG{n}{key}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{10}\PYG{p}{]} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{tmp}\PYG{p}{))])}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{()}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{full\PYGZus{}flag}\PYG{p}{)}
+\end{Verbatim}

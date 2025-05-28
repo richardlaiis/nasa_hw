@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{pwn} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{k+kn}{import} \PYG{n+nn}{hashlib}
+
+\PYG{n}{mp} \PYG{o}{=} \PYG{n+nb}{dict}\PYG{p}{()}
+\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{o}{**}\PYG{l+m+mi}{24}\PYG{p}{):}
+    \PYG{n}{mp}\PYG{p}{[}\PYG{n}{hashlib}\PYG{o}{.}\PYG{n}{md5}\PYG{p}{(}\PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{o}{.}\PYG{n}{encode}\PYG{p}{())}\PYG{o}{.}\PYG{n}{hexdigest}\PYG{p}{()[}\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{l+m+mi}{8}\PYG{p}{]]} \PYG{o}{=} \PYG{n}{i}
+
+\PYG{n}{server} \PYG{o}{=} \PYG{n}{remote}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}140.112.91.4\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{1234}\PYG{p}{)}
+\PYG{n}{server}\PYG{o}{.}\PYG{n}{sendlineafter}\PYG{p}{(}\PYG{l+s+sa}{b}\PYG{l+s+s1}{\PYGZsq{}Your choice: \PYGZsq{}}\PYG{p}{,} \PYG{l+s+sa}{b}\PYG{l+s+s1}{\PYGZsq{}4\PYGZsq{}}\PYG{p}{)}
+
+\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{):}
+    \PYG{n}{prefix} \PYG{o}{=} \PYG{n}{server}\PYG{o}{.}\PYG{n}{recvuntil}\PYG{p}{(}\PYG{l+s+sa}{b}\PYG{l+s+s1}{\PYGZsq{}: \PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{()}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{} \PYGZsq{}}\PYG{p}{)[}\PYG{l+m+mi}{7}\PYG{p}{]}\PYG{o}{.}\PYG{n}{strip}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdq{}\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{rstrip}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdq{}\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{ans} \PYG{o}{=} \PYG{n+nb}{str}\PYG{p}{(}\PYG{n}{mp}\PYG{p}{[}\PYG{n}{prefix}\PYG{p}{])}
+    \PYG{n}{server}\PYG{o}{.}\PYG{n}{sendline}\PYG{p}{(}\PYG{n}{ans}\PYG{p}{)}
+
+\PYG{n}{ans1} \PYG{o}{=} \PYG{n}{server}\PYG{o}{.}\PYG{n}{recvline}\PYG{p}{()}
+\PYG{n}{ans2} \PYG{o}{=} \PYG{n}{server}\PYG{o}{.}\PYG{n}{recvline}\PYG{p}{()}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ans1}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{(),} \PYG{n}{ans2}\PYG{o}{.}\PYG{n}{decode}\PYG{p}{())}
+\end{Verbatim}
