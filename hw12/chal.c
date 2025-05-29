@@ -32,7 +32,7 @@ void term_proc();
 // Data declarations
 
 void *_dso_handle = &_dso_handle; // idb
-char key[9] = "nAs42O2S"; // weak
+
 char pattern[40] =
 {
   '&',

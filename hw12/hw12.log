@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2025.5.15)  28 MAY 2025 20:48
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2025.5.15)  29 MAY 2025 10:43
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -880,29 +880,55 @@ Package fontspec Info: Font family 'FandolFang-Regular(0)' created for font
 (fontspec)             <->"[FandolFang-Regular.otf]/OT:language=dflt;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
+[1
+
+]
 \openout3 = `hw12.pyg'.
 
-(./_minted-hw12/default.pygstyle)
+ (./_minted-hw12/default.pygstyle)
 (./_minted-hw12/BC5131B2B02DF36474E73427F00E8960A1B3B8174235B350881FDF48C75B321
 C.pygtex
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2.
- [1
+)
 
-])
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[2]
 \openout3 = `hw12.pyg'.
 
-runsystem(pygmentize -l 'c' -f latex -P commandprefix=PYG -F tokenmerge -P stri
-pnl='False' -o _minted-hw12/88B48B77A78538B6309F4A8A16D4396831E9E3B63EBA24300F6
-8786F5749D717.pygtex hw12.pyg)...executed.
+
+(./_minted-hw12/8D6A276A2EBDB5110B06673880B20362A1B3B8174235B350881FDF48C75B321
+C.pygtex)
+\openout3 = `hw12.pyg'.
+
+
+(./_minted-hw12/876A4EAD52676A755FA9C18091E2856FA1B3B8174235B350881FDF48C75B321
+C.pygtex
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[3])
+Overfull \hbox (20.47891pt too wide) in paragraph at lines 151--152
+\TU/lmr/m/n/12 sion \TU/NotoSerifTC(0)/m/n/12 裡 面 唯 一 的 \TU/lmr/m/n/12 property
+ \TU/NotoSerifTC(0)/m/n/12 是 [][]\TU/lmtt/m/n/12 username[]\TU/NotoSerifTC(0)/m
+/n/12 ，|  在 登 入 後 在 網 站 的 [][]\TU/lmtt/m/n/12 DevTools > Application > Cookies
+ []
+
+\openout3 = `hw12.pyg'.
 
 
 (./_minted-hw12/88B48B77A78538B6309F4A8A16D4396831E9E3B63EBA24300F68786F5749D71
-7.pygtex)
-\openout3 = `hw12.pyg'.
-
-
-(./_minted-hw12/7C6AB4E0943C79A5438385F71E0372F231E9E3B63EBA24300F68786F5749D71
 7.pygtex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -912,16 +938,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[2])
+[4])
 \openout3 = `hw12.pyg'.
 
 
-(./_minted-hw12/05542265D3462A0EB0CABC048318F2C131E9E3B63EBA24300F68786F5749D71
+(./_minted-hw12/7C6AB4E0943C79A5438385F71E0372F231E9E3B63EBA24300F68786F5749D71
 7.pygtex)
-runsystem(rm _minted-hw12/A7B7247172731EF0F8D8C4A4A2852F6A31E9E3B63EBA24300F687
-86F5749D717.pygtex)...executed.
+\openout3 = `hw12.pyg'.
 
 
+(./_minted-hw12/BB7922018B2E10E5524AF6FB99D9052431E9E3B63EBA24300F68786F5749D71
+7.pygtex)
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -930,19 +957,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[3] (./hw12.aux)
+[5] (./hw12.aux)
 Package rerunfilecheck Info: File `hw12.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 runsystem(rm hw12.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 20487 strings out of 476696
- 433738 string characters out of 5806955
- 1867018 words of memory out of 6000000
- 40377 multiletter control sequences out of 15000+600000
+ 20508 strings out of 476696
+ 435280 string characters out of 5806955
+ 1865018 words of memory out of 6000000
+ 40393 multiletter control sequences out of 15000+600000
  519370 words of font info for 90 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,11n,97p,908b,774s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,12n,97p,912b,776s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on hw12.pdf (3 pages).
+Output written on hw12.pdf (5 pages).
