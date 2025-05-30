@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZlt{}}\PYG{n+nt}{iframe} \PYG{n+na}{src}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}javascript:alert(`xss`)\PYGZdq{}}\PYG{p}{\PYGZgt{}}
+\end{Verbatim}
