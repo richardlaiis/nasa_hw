@@ -43,6 +43,70 @@
 % \doublespacing
 \maketitle
 
+\section*{1. 三角準則的侵略者!?}
+\subsection*{(a)}
+\begin{enumerate}
+    \item 2017 年的勒索病毒 Wanacry 全球災情，被病毒感染時，電腦中檔案會被加密，必須支付比特幣才有可能解鎖。違反 CIA 三項，因為駭客能遠端存取、操作你的檔案 (違反 C)，電腦的檔案或服務也可能毀壞、變得不完整 (違反 IA)。
+    \item Crazy Hunter 組織透過 USB 的途徑感染電腦，駭得馬偕醫院的病患資料。違反 CIA 中的 Confidentiality，因為病患的病例與身份皆為相當敏感、重要，應被更多加密與保護的資訊。
+\end{enumerate}
+\subsection*{(b)}
+\noindent \textbf{Assumption:}
+
+\noindent 筆電的硬體設備無故障 (且記憶體、硬碟容量夠)
+
+\noindent \textbf{Threat Model:}
+
+\begin{center}
+\begin{tabular}{ |c|c| } 
+ \hline
+ Threat Model & Countermeasure \\
+ \hline
+ 有人嘗試從旁偷窺密碼 & 安裝螢幕防窺片 \\ 
+ \hline
+ 有人使用暴力破解密碼 (大量輸入) & 採用指紋/臉部辨識解鎖 \\ 
+ \hline
+\end{tabular}
+\end{center}
+\subsection*{(c)}
+\noindent \textbf{Assumption:}
+
+\noindent 傳送簡訊時，必定可以成功發送
+
+\noindent \textbf{Threat Model:}
+
+\begin{center}
+\begin{tabular}{ |p{0.4\linewidth}|p{0.4\linewidth}| } 
+ \hline
+ Threat Model & Countermeasure \\
+ \hline
+ 簡訊內容可以被偽造 (可以在 A 地點，傳送 B 地點條碼所生的簡訊) & 使用 GPS 定位使用者的傳送地點 \\ 
+ \hline
+ 有人手動修改簡訊內容，誤導也浪費實名制系統的資源 & 對簡訊的格式嚴格過濾(不符合格式的無法傳送) \\ 
+ \hline
+\end{tabular}
+\end{center}
+\subsection*{(d)}
+\noindent \textbf{Assumption:}
+
+\noindent 1. 所有人的電腦、網路介面均能正常運作
+
+\noindent 2. 考生無法連上任何通訊軟體 (Gmail, Discord...etc)
+
+\noindent \textbf{Threat Model:}
+
+\begin{center}
+\begin{tabular}{ |p{0.4\linewidth}|p{0.4\linewidth}| } 
+ \hline
+ Threat Model & Countermeasure \\
+ \hline
+ 有人透過工作站的 \verb|/tmp2/| 存放作答資訊 & 令考生暫時只能修改home，封鎖其特定folder的權限 \\ 
+ \hline
+ 有人試著偽造其他組的 token，幫他們作答 & 作答前組員會取得 OTP，表單須繳交該份 OTP 才算有效 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+\newpage
 \section*{2. 果汁店也有洞 (20 pts)}
 \subsection*{(a)}
 \subsubsection*{(i) DOM XSS}
@@ -57,6 +121,9 @@ I open Burp Suite's browser and intercept its traffic, then I observe that when 
 \subsection*{(b)}
 
 \newpage
+\section*{3. R-SA！破密部}
+
+\newpage
 \section*{4. TESTING in the FUZZ (41 pts)}
 \subsection*{(a)}
 mutation-based fuzzing is about mutating the existing input values but in lack of understaning the format of the data. generation-based fuzzing is about generating input based on specific or expected format/structure.
@@ -65,6 +132,21 @@ subsection*{(b)}
 
 \newpage
 \section*{5. 敗北協定太多了！ (28 pts)}
+\subsection*{(a)}
+攻擊者向 DNS resolver 發送大量的 UDP packet (參數可能是 ANY，讓之後得到的 response 越大越好)，將受害者的 IP 放在其中，因此 DNS resolver 將傳送大量的 response 給受害者，可能導致網路、性能遭到癱瘓。
+
+這個攻擊可以透過減少 public DNS resolver 的數量，以及對 source IP 驗證來解決。
+\subsection*{(b)}
+DNS server 為了加快之後回覆的速度，會存取某 domain 對應到的 IP 作為 cache。Attackers 可以向 DNS server　發出請求，然後當 DNS server 要向 authorative server 請求時，Attackers　可以偽裝成一個合法的 authorative server 向 DNS server 給出扭曲的回應/域名對應到的 IP，也因此 DNS server 之後對於某域名的 cache 都是被污染的。之後受害者去連某域名時，會被 redirect 到駭客提供的 IP。
+
+解決方式可以是透過 DNSSEC　來檢查 DNS 封包的完整性與合法性，或是頻繁更新 DNS cache。
+\subsection*{(c)}
+SPF 是 Sender Policy Framework 的縮寫，基本上就是 Domain owner 會在他的 DNS server 
+\subsection*{(d)}
+DKIM (DomainKeys Identified Mail)
+\subsection*{(e)}
+\subsection*{(f)}
+\subsection*{(g)}
 
 \newpage
 \section*{6. 猫物語（赤）(34 pts)}
